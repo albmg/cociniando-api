@@ -4,17 +4,6 @@ const router = Router();
 const admin = require("firebase-admin");
 const db = admin.firestore()
 
-//add an ingredient
-router.post("/api/ingredients", async (req, res) => {
-  try {
-    await db.collection("ingredients").doc().create({name: req.body.name})
-    return res.status(204).json()
-  }
-  catch(error) {
-    console.log(error);
-    return res.status(500).send(error)
-  }
-});
 
 // get all ingredients
 router.get("/api/ingredients", async (req, res) => {
@@ -50,6 +39,17 @@ router.get("/api/ingredients/:ingredient_id", (req, res) => {
   })();
 });
 
+//add an ingredient
+router.post("/api/ingredients", async (req, res) => {
+  try {
+    await db.collection("ingredients").doc().create({name: req.body.name})
+    return res.status(204).json()
+  }
+  catch(error) {
+    console.log(error);
+    return res.status(500).send(error)
+  }
+});
 
 
 module.exports = router;
